@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Garage Mécanique — Nom du Garage</title>
+  <meta name="description" content="Entretien, réparation auto, pneus, freins et diagnostics. Devis gratuit et RDV rapide." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Garage Mécanique — Nom du Garage" />
+  <meta property="og:description" content="Entretien, réparation auto, pneus, freins et diagnostics. Devis gratuit et RDV rapide." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/cover.jpg" />
+  <meta property="og:url" content="https://VOTRE-UTILISATEUR.github.io/" />
+  <link rel="icon" href="assets/favicon.png" />
+  <style>
+    :root{
+      --bg: #0f172a;        /* bleu nuit */
+      --card: #0b1224;      /* plus sombre pour cartes */
+      --fg: #e2e8f0;        /* texte clair */
+      --muted: #94a3b8;     /* texte secondaire */
+      --primary: #eab308;   /* jaune garage */
+      --accent: #22c55e;    /* vert accent */
+      --danger: #ef4444;    /* rouge alerte */
+      --shadow: 0 10px 30px rgba(0,0,0,.3);
+      --radius: 18px;
+    }
+    /* Thèmes rapides (changez la classe du <body>) */
+    .theme-bleu{ --primary:#38bdf8; --accent:#22c55e; }
+    .theme-rouge{ --primary:#ef4444; --accent:#f59e0b; }
+    .theme-vert{ --primary:#22c55e; --accent:#38bdf8; }
+
+    *{ box-sizing: border-box }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--fg); font:16px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    a{ color:inherit; text-decoration:none }
+    img{ max-width:100%; display:block; border-radius:12px }
+    .container{ width:min(1100px, 92%); margin-inline:auto }
+    .btn{ display:inline-flex; align-items:center; gap:.6rem; background:var(--primary); color:#0b1224; padding:.9rem 1.1rem; border-radius:999px; font-weight:700; box-shadow:var(--shadow); border:0; cursor:pointer }
+    .btn.secondary{ background:transparent; color:var(--fg); border:1px solid rgba(226,232,240,.25) }
+    .chip{ display:inline-block; padding:.35rem .7rem; border-radius:999px; background:rgba(226,232,240,.09); color:var(--muted); font-size:.85rem }
+    .card{ background:var(--card); border:1px solid rgba(226,232,240,.08); border-radius:var(--radius); padding:1.2rem; box-shadow:var(--shadow) }
+    .grid{ display:grid; gap:1rem }
+    .grid-3{ grid-template-columns:repeat(3,1fr) }
+    .grid-2{ grid-template-columns:repeat(2,1fr) }
+    @media (max-width:900px){ .grid-3{ grid-template-columns:1fr 1fr } }
+    @media (max-width:640px){ .grid-3,.grid-2{ grid-template-columns:1fr } }
+
+    header{ position:sticky; top:0; backdrop-filter:saturate(180%) blur(8px); background:rgba(15,23,42,.65); border-bottom:1px solid rgba(226,232,240,.06); z-index:50 }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:.8rem 0 }
+    .brand{ display:flex; align-items:center; gap:.6rem; font-weight:900; letter-spacing:.2px }
+    .brand .logo{ width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg, var(--primary), #fff 150%); display:grid; place-items:center; color:#0b1224; font-weight:900 }
+    .links{ display:flex; gap:1.2rem; align-items:center }
+    .links a{ color:var(--muted) }
+    .links a:hover{ color:var(--fg) }
+    #menuBtn{ display:none }
+    @media (max-width:860px){
+      #menuBtn{ display:inline-flex }
+      .links{ position:fixed; inset:60px 0 auto 0; background:rgba(15,23,42,.98); flex-direction:column; padding:1rem; border-bottom:1px solid rgba(226,232,240,.06); transform:translateY(-120%); transition:transform .25s ease }
+      .links.open{ transform:translateY(0) }
+    }
+
+    .hero{ padding:4rem 0 2.5rem }
+    .hero h1{ font-size:clamp(1.9rem, 2.6vw + 1rem, 3.2rem); line-height:1.1; margin:0 0 1rem }
+    .hero p{ color:var(--muted); font-size:1.1rem }
+    .badges{ display:flex; gap:.6rem; flex-wrap:wrap; margin:.8rem 0 1.2rem }
+    .cta{ display:flex; gap:.6rem; flex-wrap:wrap; margin-top:1.2rem }
+
+    section{ padding:2.2rem 0 }
+    h2{ font-size:1.6rem; margin:0 0 1rem }
+    .subtitle{ color:var(--muted); margin:0 0 1.2rem }
+
+    .price{ font-weight:800; font-size:1.5rem }
+    .table{ width:100%; border-collapse:collapse; overflow:hidden; border-radius:var(--radius) }
+    .table th, .table td{ padding:1rem; text-align:left; border-bottom:1px solid rgba(226,232,240,.06) }
+    .table th{ background:rgba(226,232,240,.04); color:var(--muted) }
+
+    .hours{ display:grid; grid-template-columns:auto 1fr; gap:.5rem 1.2rem; color:var(--muted) }
+
+    footer{ border-top:1px solid rgba(226,232,240,.06); padding:2rem 0; color:var(--muted) }
+    .social{ display:flex; gap:.8rem }
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0 }
+  </style>
+</head>
+<body class="theme-bleu">
+  <header>
+    <div class="container nav" role="navigation" aria-label="Navigation principale">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🔧</div>
+        <span>Nom du Garage</span>
+      </div>
+      <nav>
+        <button id="menuBtn" class="btn secondary" aria-expanded="false" aria-controls="menuLinks">Menu</button>
+        <div id="menuLinks" class="links" role="menubar">
+          <a role="menuitem" href="#services">Services</a>
+          <a role="menuitem" href="#tarifs">Tarifs</a>
+          <a role="menuitem" href="#galerie">Galerie</a>
+          <a role="menuitem" href="#avis">Avis</a>
+          <a role="menuitem" href="#contact">Contact</a>
+          <a role="menuitem" class="btn" href="tel:+33000000000">📞 Appeler</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container grid grid-2" style="align-items:center">
+        <div>
+          <span class="chip">Devis gratuit • RDV rapide</span>
+          <h1>Garage mécanique de confiance pour votre véhicule</h1>
+          <p>Entretien, révision constructeur, freins, pneus, diagnostics, climatisation… Nous prenons soin de votre voiture comme si c’était la nôtre.</p>
+          <div class="cta">
+            <a class="btn" href="https://wa.me/33000000000" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a class="btn secondary" href="#contact">📅 Demander un devis</a>
+          </div>
+          <div class="badges">
+            <span class="chip">✅ Garantie constructeur préservée</span>
+            <span class="chip">🏷️ Pièces d’origine ou équivalentes</span>
+            <span class="chip">⭐ 4.9/5 Avis clients</span>
+          </div>
+        </div>
+        <div>
+          <!-- Remplacez les images par vos photos dans /assets -->
+          <img src="assets/atelier.jpg" alt="Photo de l'atelier du garage" />
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <h2>Nos services</h2>
+        <p class="subtitle">Tout pour rouler sereinement.</p>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Entretien & Révision</h3>
+            <p>Vidange, filtres, bougies, climatisation, contrôle complet selon le carnet constructeur.</p>
+          </div>
+          <div class="card">
+            <h3>Freinage & Sécurité</h3>
+            <p>Disques, plaquettes, liquide de frein, amortisseurs et géométrie.</p>
+          </div>
+          <div class="card">
+            <h3>Pneus & Jantes</h3>
+            <p>Montage, équilibrage, réparation, pneus été/hiver/4 saisons.</p>
+          </div>
+          <div class="card">
+            <h3>Diagnostic électronique</h3>
+            <p>Lecture défauts OBD, effacement codes, batterie, alternateur, capteurs.</p>
+          </div>
+          <div class="card">
+            <h3>Mécanique générale</h3>
+            <p>Embrayage, distribution, refroidissement, échappement, fuites…</p>
+          </div>
+          <div class="card">
+            <h3>Pré-contrôle technique</h3>
+            <p>Inspection, corrections, préparation au passage pour éviter la contre-visite.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TARIFS -->
+    <section id="tarifs">
+      <div class="container">
+        <h2>Tarifs indicatifs</h2>
+        <p class="subtitle">Main d’œuvre, pièces de qualité, transparence totale.</p>
+        <div class="card">
+          <table class="table" aria-label="Tableau des tarifs indicatifs">
+            <thead>
+              <tr><th>Prestation</th><th>Détails</th><th>À partir de</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Vidange + filtre</td><td>Huile + filtre neuf, contrôles 15 points</td><td class="price">69€</td></tr>
+              <tr><td>Freins (paire)</td><td>Disques + plaquettes (selon modèle)</td><td class="price">149€</td></tr>
+              <tr><td>Pneus</td><td>Montage/équilibrage (par pneu)</td><td class="price">15€</td></tr>
+              <tr><td>Diagnostic OBD</td><td>Lecture + rapport</td><td class="price">25€</td></tr>
+              <tr><td>Heure MO</td><td>Main d’œuvre</td><td class="price">55€</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="subtitle">Demandez un devis précis avec votre immatriculation.</p>
+      </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section id="galerie">
+      <div class="container">
+        <h2>Galerie</h2>
+        <p class="subtitle">Quelques travaux récents à l’atelier.</p>
+        <div class="grid grid-3">
+          <img src="assets/photo1.jpg" alt="Changement de freins sur berline" />
+          <img src="assets/photo2.jpg" alt="Révision complète sur citadine" />
+          <img src="assets/photo3.jpg" alt="Montage pneus 4 saisons" />
+        </div>
+      </div>
+    </section>
+
+    <!-- AVIS -->
+    <section id="avis">
+      <div class="container">
+        <h2>Avis clients</h2>
+        <div class="grid grid-3">
+          <div class="card"><p>“Service rapide et honnête, je recommande !”</p><p class="subtitle">— Alex</p></div>
+          <div class="card"><p>“Prix corrects, explications claires. Merci !”</p><p class="subtitle">— Nadia</p></div>
+          <div class="card"><p>“Ils ont sauvé mes vacances, top.”</p><p class="subtitle">— Karim</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container grid grid-2">
+        <div>
+          <h2>Contact & Accès</h2>
+          <p class="subtitle">Passez à l’atelier ou écrivez-nous.</p>
+          <div class="card">
+            <p><strong>Adresse</strong><br> 12 Rue du Garage, 75000 Paris</p>
+            <p><strong>Téléphone</strong><br> <a href="tel:+33000000000">+33 0 00 00 00 00</a></p>
+            <p><strong>Email</strong><br> <a href="mailto:contact@exemple.com">contact@exemple.com</a></p>
+            <div class="hours" aria-label="Horaires d'ouverture">
+              <span>Lun–Ven</span><span>08:30–12:30 • 14:00–18:00</span>
+              <span>Sam</span><span>09:00–13:00</span>
+              <span>Dim</span><span>Fermé</span>
+            </div>
+            <div class="cta" style="margin-top:1rem">
+              <a class="btn" href="tel:+33000000000">📞 Appeler</a>
+              <a class="btn secondary" href="https://wa.me/33000000000" target="_blank" rel="noopener">💬 WhatsApp</a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <!-- Carte Google Maps intégrée (remplacez l’URL par la vôtre) -->
+            <iframe title="Plan d'accès" src="https://www.google.com/maps?q=12%20Rue%20du%20Garage,%2075000%20Paris&output=embed" style="width:100%; height:320px; border:0; border-radius:12px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <!-- Formulaire simple (ouvre le client mail) -->
+            <form style="margin-top:1rem" action="mailto:contact@exemple.com" method="post" enctype="text/plain">
+              <label class="sr-only" for="nom">Nom</label>
+              <input id="nom" name="Nom" placeholder="Votre nom" required class="card" style="width:100%; margin:.4rem 0" />
+              <label class="sr-only" for="email">Email</label>
+              <input id="email" type="email" name="Email" placeholder="Votre email" required class="card" style="width:100%; margin:.4rem 0" />
+              <label class="sr-only" for="msg">Message</label>
+              <textarea id="msg" name="Message" placeholder="Votre message" rows="4" required class="card" style="width:100%; margin:.4rem 0"></textarea>
+              <button class="btn" type="submit">✉️ Envoyer</button>
+              <p class="subtitle">Astuce : vous pouvez remplacer ce formulaire par un Google Form ou Formspree pour recevoir les messages sans client mail.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap">
+      <div>© <span id="year"></span> Nom du Garage — Tous droits réservés.</div>
+      <div class="social">
+        <a href="#" aria-label="Facebook">🔵</a>
+        <a href="#" aria-label="Instagram">📸</a>
+        <a href="#" aria-label="TikTok">🎵</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Données structurées LocalBusiness pour SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "Nom du Garage",
+    "image": "https://VOTRE-UTILISATEUR.github.io/assets/cover.jpg",
+    "url": "https://VOTRE-UTILISATEUR.github.io/",
+    "telephone": "+33 0 00 00 00 00",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "12 Rue du Garage",
+      "addressLocality": "Paris",
+      "postalCode": "75000",
+      "addressCountry": "FR"
+    },
+    "openingHours": "Mo-Fr 08:30-12:30,14:00-18:00 Sa 09:00-13:00",
+    "priceRange": "€€"
+  }
+  </script>
+
+  <script>
+    // Menu mobile
+    const btn = document.getElementById('menuBtn');
+    const links = document.getElementById('menuLinks');
+    btn?.addEventListener('click', () => {
+      const isOpen = links.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    // Scroll doux interne
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); links.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+      })
+    })
+    // Année automatique
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
